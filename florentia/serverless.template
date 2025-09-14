@@ -1,0 +1,27 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "Florentia Backend ASP.NET Core Web API on AWS Lambda",
+  "Resources": {
+    "FlorentiaApiFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "FlorentiaBackend",
+        "Runtime": "dotnet8",
+        "MemorySize": 256,
+        "Timeout": 30,
+        "CodeUri": "",
+        "PackageType": "Zip",
+        "Events": {
+          "ApiGatewayProxy": {
+            "Type": "Api",
+            "Properties": {
+              "Path": "/{proxy+}",
+              "Method": "ANY"
+            }
+          }
+        }
+      }
+    }
+  }
+}
